@@ -1,3 +1,9 @@
+/*
+** SQL CODE ANSWERS 
+** 
+** DIFFICULT LEVEL: MEDIUM
+*/
+
 -- The PADS
 -- https://www.hackerrank.com/challenges/the-pads/problem?isFullScreen=true
 
