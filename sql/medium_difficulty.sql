@@ -94,7 +94,7 @@ SELECT
     END AS Grades,
     Marks
 FROM STUDENTS
-ORDER BY 2 DESC, 1
+ORDER BY 2 DESC, 1;
 
 -- CODE 2
 SELECT
@@ -116,6 +116,32 @@ SELECT
     END AS Grades,
     Marks
 FROM STUDENTS
-ORDER BY 2 DESC, 1
+ORDER BY 2 DESC, 1;
+
+/*****************************************************/
+
+-- Weather Observation Station 18 (Manhattan distance)
+-- https://www.hackerrank.com/challenges/weather-observation-station-18/problem?isFullScreen=true
+
+-- CODE 1
+SELECT FORMAT(ABS(MIN(LAT_N) - MAX(LAT_N)) + ABS(MIN(LONG_W) - MAX(LONG_W)), '.####')
+FROM STATION;
+
+-- CODE 2
+SELECT ROUND(ABS(MIN(LAT_N) - MAX(LAT_N)) + ABS(MIN(LONG_W) - MAX(LONG_W)), 4)
+FROM STATION;
+
+/*****************************************************/
+
+-- Weather Observation Station 19 (euclidian distance)
+-- https://www.hackerrank.com/challenges/weather-observation-station-19/problem?isFullScreen=true
+
+-- CODE 1
+SELECT FORMAT(SQRT(SQUARE(MAX(LAT_N) - MIN(LAT_N)) + SQUARE(MAX(LONG_W) - MIN(LONG_W))), '.####')
+FROM STATION;
+
+-- CODE 2
+SELECT ROUND(SQRT(POWER(MAX(LAT_N) - MIN(LAT_N), 2) + POWER(MAX(LONG_W) - MIN(LONG_W), 2)), 4)
+FROM STATION;
 
 /*****************************************************/
