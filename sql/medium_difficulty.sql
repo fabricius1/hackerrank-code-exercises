@@ -145,3 +145,29 @@ SELECT ROUND(SQRT(POWER(MAX(LAT_N) - MIN(LAT_N), 2) + POWER(MAX(LONG_W) - MIN(LO
 FROM STATION;
 
 /*****************************************************/
+
+-- Weather Observation Station 20 (calculate median)
+-- https://www.hackerrank.com/challenges/weather-observation-station-20/problem?isFullScreen=true
+
+-- CODE 1
+-- (from https://stackoverflow.com/questions/1342898/function-to-calculate-median-in-sql-server/2026609#2026609)
+SELECT FORMAT((
+(SELECT MAX(LAT_N) FROM
+    (SELECT TOP 50 PERCENT LAT_N FROM STATION ORDER BY LAT_N) AS t1)
+    +
+(SELECT MIN(LAT_N) FROM
+    (SELECT TOP 50 PERCENT LAT_N FROM STATION ORDER BY LAT_N DESC) AS t2)
+) / 2, '.####');
+
+-- CODE 2
+-- (from https://stackoverflow.com/a/7263925)
+SELECT ROUND(AVG(dd.LAT_N), 4) as median_val
+FROM (
+SELECT s.LAT_N, @rownum:=@rownum+1 as `row_number`, @total_rows:=@rownum
+  FROM STATION s, (SELECT @rownum:=0) r
+  WHERE s.LAT_N is NOT NULL
+  ORDER BY s.LAT_N
+) as dd
+WHERE dd.row_number IN ( FLOOR((@total_rows+1)/2), FLOOR((@total_rows+2)/2) );
+
+/*****************************************************/
